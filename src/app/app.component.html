@@ -1,0 +1,40 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <h4 class="navbar-brand"><span class = "glyphicon glyphicon-music"> </span> music-app</h4>
+</nav>
+<div class="container">
+  <h2>Welcome to the music-app</h2>
+  <p>Search any song from itunes and enjoy the high quality music.</p>
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="search"
+              class="form-control"
+              placeholder="Enter search string"
+              [(ngModel)]="search"
+              [formControl]="searchField">
+      </div>
+      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    </form>
+    
+    <br>
+<div *ngIf = "search">
+  <h3>Showing 20 results for {{search}}....</h3>
+  
+</div>
+  <div class="text-center">
+    <p class="lead" *ngIf="loading">Loading...</p>
+  </div>
+
+  <ul class="media-list">
+    <li class="media"
+        *ngFor="let track of results | async |orderBy:order">
+      <img src="{{track.thumbnail}}" class="media-object img-circle">
+      <div class = "media-body">
+        <h4><a target="_blank" href="{{track.link}}">{{ track.track }}
+      </a></h4>
+      <h4 >Price:<span class="glyphicon glyphicon-usd"></span>{{track.trackPrice}}</h4>
+      <h4>Artist:{{track.artist}}</h4>
+    </div>
+    </li>
+  </ul>
+</div>
